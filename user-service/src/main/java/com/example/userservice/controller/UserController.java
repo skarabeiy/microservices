@@ -24,4 +24,9 @@ public class UserController {
     public String testConfig() {
         return userService.testConfig();
     }
+
+    @GetMapping("create-user")
+    public void createUser() {
+        userService.createUser();
+    }
 }

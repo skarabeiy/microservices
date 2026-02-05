@@ -14,6 +14,7 @@
         <module>user-service</module>
         <module>order-service</module>
         <module>config-server</module>
+        <module>common-events</module>
     </modules>
 
     <properties>

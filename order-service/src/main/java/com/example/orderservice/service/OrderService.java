@@ -1,6 +1,7 @@
 package com.example.orderservice.service;
 
 import com.example.orderservice.client.UserClient;
+import events.UserCreatedEvent;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,5 +15,9 @@ public class OrderService {
 
     public String testFeign() {
         return "Hello from Order Service!\n" + userClient.testUserService();
+    }
+
+    public void handleUserCreated(UserCreatedEvent event) {
+        System.out.println(event.userId() + " " + event.email());
     }
 }
