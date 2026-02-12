@@ -20,3 +20,28 @@ eureka:
       defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      randomService:
+#        считает статистику по последним (6) вызовам. может быть
+#        может быть еще COUNT_BASED (как только кол-во ошибок достигнет какого-то кол-ва)
+#        TIME_BASED кол-во ошибок за время
+        slidingWindowSize: 6
+#        Минимальное количество вызовов перед тем, как считать failureRate.
+#        Пока не накопится 6 вызовов — CircuitBreaker НЕ будет открываться, даже если все 6 были ошибками.
+        minimumNumberOfCalls: 6
+#        Порог процента ошибок, при котором CircuitBreaker открывается.
+        failureRateThreshold: 20
+#        Сколько времени CircuitBreaker будет в состоянии OPEN. Потом перейдет в состояние HALF_OPEN
+        waitDurationInOpenState: 10s
+#        Число тестовых вызовов в HALF_OPEN
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,circuitbreakers

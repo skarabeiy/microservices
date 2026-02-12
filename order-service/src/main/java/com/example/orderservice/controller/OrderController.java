@@ -1,6 +1,7 @@
 package com.example.orderservice.controller;
 
 import com.example.orderservice.service.OrderService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,10 @@ public class OrderController {
     @GetMapping("/test-feign")
     public String testFeign() {
         return orderService.testFeign();
+    }
+
+    @GetMapping("/call")
+    public String call() {
+        return orderService.unstableMethod();
     }
 }
