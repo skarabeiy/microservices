@@ -1,0 +1,17 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb  # in-memory база H2
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
+  h2:
+    console:
+      enabled: true
+      path: /h2-console   # веб-консоль будет доступна по http://localhost:8080/h2-console
+
+# показывать SQL-запросы в логах (полезно для отладки)
+logging:
+  level:
+    io.r2dbc.h2: DEBUG
